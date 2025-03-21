@@ -47,6 +47,7 @@ export class JuegoComponent implements OnInit {
 
   // Mira si los campos del formulario, al salir de ellos, son validos. Si lo son habilita el botón, si no lo deshabilita
   onBlurDatos(): void {
+
     this.nombreBool = false;
     this.apellidoBool = false;
     this.numMaxBool = false;
@@ -68,6 +69,10 @@ export class JuegoComponent implements OnInit {
       (document.getElementById("btn-datos") as HTMLButtonElement).disabled = false;
     } else {
       (document.getElementById("btn-datos") as HTMLButtonElement).disabled = true;
+    }
+
+    for(let i:number = 0; i < document.getElementsByClassName("feedback").length; i++) {
+      (document.getElementsByClassName("feedback")[i] as HTMLInputElement).hidden = false;
     }
   }
 
