@@ -1,1 +1,69 @@
-<p>juego works!</p>
+<h1>Juego de Adivinación</h1>
+
+<h2>Configura tu juego:</h2>
+
+<!-- Formulario configuración -->
+<form class="form-datos">
+
+  <!-- Campo nombre -->
+  <div class="campo-container">
+    <label for="nombre-input" class="nombre-label">Nombre: </label>
+    <input type="text" name="nombre" id="nombre-input" class="inputs" required [(ngModel)]="this.nombre" (blur)="onBlurDatos()">
+    <span class="feedback">{{this.nombreBool ? 'El nombre no puede estar vacío' : "&#9989;"}}</span>
+  </div>
+
+  <!-- Campo apellido -->
+  <div class="campo-container">
+    <label for="apellido-input" class="apellido-label">Apellido: </label>
+    <input type="text" name="apellido" id="apellido-input" class="inputs" [(ngModel)]="this.apellido" (blur)="onBlurDatos()">
+    <span class="feedback" >{{this.apellidoBool ? 'El apellido no puede estar vacío' : "&#9989;"}}</span>
+  </div>
+
+  <!-- Campo número aleatorio -->
+  <div class="campo-container">
+    <label for="n-random-input" class="n-random-label">Cantidad de número a generar: </label>
+    <input type="text" name="n-random" id="n-random-input" class="inputs" [(ngModel)]="this.numMax" (blur)="onBlurDatos()">
+    <span class="feedback">{{this.numMaxBool ? 'El número introducido es menor que el rango mínimo (4)' : "&#9989;"}}</span>
+  </div>
+
+  <!-- Campo intentos -->
+  <div class="campo-container">
+    <label for="intentos-input" class="intentos-label">Número de intentos: </label>
+    <input type="text" name="intentos" id="intentos-input" class="inputs" [(ngModel)]="this.numIntentos" (blur)="onBlurDatos()">
+    <span class="feedback">{{this.numIntentosBool ? 'El número introducido es menor que el rango mínimo (1)' : "&#9989;"}}</span>
+  </div>
+
+  <!-- Boton recoger datos -->
+   <button type="submit" id="btn-datos" (click)="getDatos()" disabled>Recoger datos</button>
+
+</form>
+
+
+
+<div class="adivinanza-container" *ngIf="this.validForm">
+
+  <!-- Mensaje de bienvenida -->
+  <h2>Ongi Etorri {{this.formConfig.tuNombre}} {{this.formConfig.tuApellido}}</h2>
+
+  <!-- Campo numero escogido -->
+  <div class="adivinanza-campo">
+    <label for="n-guess" class="n-guess-label">Tú número: </label>
+    <input type="text" name="n-guess" id="n-guess" [(ngModel)]="this.numGuess">
+
+    <!-- Botón eviar número -->
+    <button type="submit" id="btn-enviar" (click)="adivinarNumero()">Enviar</button>
+
+  </div>
+
+  <!-- Mensaje resultado -->
+  <ul [ngSwitch]="this.resultado">
+    <li *ngSwitchCase="'purple'" [ngStyle]="{color: resultado}">Te pasaste</li>
+    <li *ngSwitchCase="'red'" [ngStyle]="{color: resultado}">Caliente</li>
+    <li *ngSwitchCase="'gold'" [ngStyle]="{color: resultado}">Templado</li>
+    <li *ngSwitchCase="'blue'" [ngStyle]="{color: resultado}">Frío</li>
+    <li *ngSwitchCase="'green'" [ngStyle]="{color: resultado}">Has ganado</li>
+  </ul>
+
+  <p class="cantidadIntentos">Te quedan {{this.intentosRestantes}} intentos</p>
+
+</div>
