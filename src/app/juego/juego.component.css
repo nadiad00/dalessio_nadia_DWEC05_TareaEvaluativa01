@@ -1,24 +1,31 @@
+.cuerpo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-datos {
+  width: 500px;
   border: 1px solid black;
   padding: 15px;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .campo-container {
-  padding-bottom: 5px;
+  padding-bottom: 6px;
 }
 
 .feedback {
   padding-left: 5px;
   color: red;
+  padding-bottom: 6px;
+  font-size: small;
 }
 
-.adivinanza-campo {
-  padding: 15px;
-}
-
-.btn-enviar {
-  margin-left: 10px;
+.adivinanza-container {
+  text-align: center;
 }
 
 li {

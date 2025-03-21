@@ -31,6 +31,7 @@ export class JuegoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Al hacer click actualiza el objeto formConfig con los datos del formulario, deshabilita los campos de este y calcula el número a acertar
   getDatos(): void {
     this.formConfig = {tuNombre: this.nombre, tuApellido: this.apellido, tuNumMax: this.numMax, tuNumIntentos: this.numIntentos};
     this.validForm = true;
@@ -44,6 +45,7 @@ export class JuegoComponent implements OnInit {
     this.intentosRestantes = this.formConfig.tuNumIntentos;
   }
 
+  // Mira si los campos del formulario, al salir de ellos, son validos. Si lo son habilita el botón, si no lo deshabilita
   onBlurDatos(): void {
     this.nombreBool = false;
     this.apellidoBool = false;
@@ -70,12 +72,15 @@ export class JuegoComponent implements OnInit {
   }
 
   adivinarNumero():void {
+
+    // Registra la cantidad de intentos que quedan y si son 0 muestra una alerta y bloquea el botón
     this.intentosRestantes = this.intentosRestantes - 1;
     if(this.intentosRestantes <= 0) {
       alert("No te quedan intentos");
       (document.getElementById("btn-enviar") as HTMLButtonElement).disabled = true;
     }
 
+    // Mira cuanto de lejos está el numero adivinado comparado con el correcto
     if(this.numGuess > this.numRandom){
       this.resultado = "purple";
     } else if(Number(this.numGuess) === (this.numRandom - 1)) {
